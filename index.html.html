@@ -1,0 +1,2030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summit Voice | Summit Technical College Magazine</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1E3A8A;
+            --secondary: #F59E0B;
+            --accent: #7C3AED;
+            --light: #F8FAFC;
+            --dark: #1E293B;
+            --success: #10B981;
+            --error: #EF4444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo img {
+            height: 50px;
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo-text span {
+            color: var(--accent);
+        }
+        
+        .school-name {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: -5px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after, nav a.active::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+        
+        /* Page Styles */
+        .page {
+            display: none;
+            padding: 40px 0;
+            min-height: 70vh;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), #0f2a6b);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--dark);
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #e6b432;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #6d28d9;
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background-color: #0da271;
+        }
+        
+        /* Featured Articles */
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .article-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .article-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .article-content {
+            padding: 20px;
+        }
+        
+        .article-category {
+            display: inline-block;
+            background-color: var(--light);
+            color: var(--primary);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .article-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .article-excerpt {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #888;
+            font-size: 0.85rem;
+        }
+        
+        /* Highlights Section */
+        .highlights {
+            background-color: white;
+            padding: 60px 0;
+            margin-bottom: 50px;
+        }
+        
+        .highlights-container {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .highlight-content {
+            flex: 1;
+        }
+        
+        .highlight-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .highlight-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .highlight-title {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .highlight-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .highlight-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .highlight-list i {
+            color: var(--secondary);
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+        
+        /* Stats Section */
+        .stats {
+            background: linear-gradient(135deg, var(--accent), #6d28d9);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        
+        .stat-item {
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+        }
+        
+        /* Editorial Team */
+        .team {
+            margin-bottom: 60px;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .team-member {
+            text-align: center;
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+        
+        .member-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 15px;
+            border: 3px solid var(--secondary);
+        }
+        
+        .member-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+        
+        .member-role {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .member-bio {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .member-contact {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .member-contact a {
+            color: var(--primary);
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .member-contact a:hover {
+            color: var(--accent);
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            background-color: var(--light);
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            font-size: 1rem;
+        }
+        
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+        
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            height: 250px;
+            cursor: pointer;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        /* Student Corner */
+        .student-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .student-work {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .student-work h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .student-work h3 i {
+            color: var(--accent);
+        }
+        
+        .work-content {
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .work-author {
+            margin-top: 15px;
+            font-style: italic;
+            color: #888;
+            text-align: right;
+        }
+        
+        /* Events */
+        .events-timeline {
+            max-width: 800px;
+            margin: 0 auto 50px;
+        }
+        
+        .event-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .event-date {
+            display: inline-block;
+            background-color: var(--light);
+            color: var(--primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .event-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        /* Archives */
+        .archives-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+        
+        .archive-year {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        
+        .archive-year:hover {
+            transform: translateY(-5px);
+        }
+        
+        .archive-year i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .archive-year h3 {
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        
+        /* Contact Form */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .contact-form {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-error {
+            color: var(--error);
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .form-control.error {
+            border-color: var(--error);
+        }
+        
+        .contact-info {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 30px;
+        }
+        
+        .contact-info h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .contact-item i {
+            color: var(--accent);
+            margin-right: 15px;
+            margin-top: 5px;
+        }
+        
+        /* Submission Success Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+        
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+        
+        .modal-icon {
+            font-size: 4rem;
+            color: var(--success);
+            margin-bottom: 20px;
+        }
+        
+        .modal h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .modal p {
+            margin-bottom: 25px;
+            color: #666;
+        }
+        
+        /* Submission Guidelines */
+        .guidelines {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .guidelines h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .guidelines h3 i {
+            color: var(--accent);
+        }
+        
+        .guidelines ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .guidelines li {
+            margin-bottom: 8px;
+        }
+        
+        /* Submission Status */
+        .submission-status {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .status-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .status-header h3 {
+            color: var(--primary);
+        }
+        
+        .status-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .status-item:last-child {
+            border-bottom: none;
+        }
+        
+        .status-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .status-icon.pending {
+            background-color: #FEF3C7;
+            color: #D97706;
+        }
+        
+        .status-icon.reviewed {
+            background-color: #DBEAFE;
+            color: var(--primary);
+        }
+        
+        .status-icon.published {
+            background-color: #D1FAE5;
+            color: var(--success);
+        }
+        
+        .status-details {
+            flex: 1;
+        }
+        
+        .status-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .status-meta {
+            display: flex;
+            color: #888;
+            font-size: 0.85rem;
+        }
+        
+        .status-date {
+            margin-right: 15px;
+        }
+        
+        /* Search Bar */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .search-btn:hover {
+            background-color: #0f2a6b;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .highlights-container, .contact-container {
+                flex-direction: column;
+            }
+            
+            .highlight-image {
+                order: -1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-wrap: wrap;
+            }
+            
+            nav {
+                width: 100%;
+                margin-top: 15px;
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .newsletter-form, .contact-container {
+                flex-direction: column;
+            }
+            
+            .search-btn {
+                position: static;
+                width: 100%;
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div>
+                    <div class="logo-text">Summit<span>Voice</span></div>
+                    <div class="school-name">Summit Technical College</div>
+                </div>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-page="articles">Articles</a></li>
+                    <li><a href="#" class="nav-link" data-page="gallery">Gallery</a></li>
+                    <li><a href="#" class="nav-link" data-page="student-corner">Student Corner</a></li>
+                    <li><a href="#" class="nav-link" data-page="events">Events</a></li>
+                    <li><a href="#" class="nav-link" data-page="team">Editorial Team</a></li>
+                    <li><a href="#" class="nav-link" data-page="archives">Archives</a></li>
+                    <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <section id="home" class="page active">
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="container">
+                <h1>Welcome to Summit Voice</h1>
+                <p>The premier student magazine of Summit Technical College, showcasing student talent and keeping our community informed.</p>
+                <a href="#" class="btn nav-link" data-page="articles">Read Latest Articles</a>
+                <a href="#" class="btn btn-primary nav-link" data-page="contact">Submit Your Work</a>
+            </div>
+        </div>
+
+        <!-- Featured Articles -->
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Articles</h2>
+            </div>
+            <div class="articles-grid">
+                <div class="article-card">
+                    <img src="E:\Chaff-2\Namibia Business Presentation - the room was full….jpeg" alt="Science Fair Winners" class="article-img">
+                    <div class="article-content">
+                        <span class="article-category">Science</span>
+                        <h3 class="article-title">Annual Science Fair Winners Announced</h3>
+                        <p class="article-excerpt">Summit's brightest young scientists showcase innovative projects at the annual science exhibition.</p>
+                        <div class="article-meta">
+                            <span><i class="far fa-user"></i>Harry  Johnson</span>
+                            <span><i class="far fa-calendar"></i> May 15, 2023</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="article-card">
+                    <img src="E:\My Office\CodeFather\Summit College\Images\Basquete in 2022 _ Sky aesthetic, Cool basketball….jpg" alt="Basketball Championship" class="article-img">
+                    <div class="article-content">
+                        <span class="article-category">Sports</span>
+                        <h3 class="article-title">Varsity Basketball Team Wins Championship</h3>
+                        <p class="article-excerpt">After an intense season, our basketball team brings home the state championship trophy.</p>
+                        <div class="article-meta">
+                            <span><i class="far fa-user"></i> Michael Mutisya</span>
+                            <span><i class="far fa-calendar"></i> May 12, 2023</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="article-card">
+                    <img src="E:\My Office\CodeFather\Summit College\Images\152387b5-9204-47a2-a85b-d011074f8873.jfif" alt="Art Exhibition" class="article-img">
+                    <div class="article-content">
+                        <span class="article-category">Arts</span>
+                        <h3 class="article-title">Spring Art Exhibition Opens This Friday</h3>
+                        <p class="article-excerpt">Student artists display their creative talents in our annual spring art showcase.</p>
+                        <div class="article-meta">
+                            <span><i class="far fa-user"></i> Emily Mumbua</span>
+                            <span><i class="far fa-calendar"></i> May 10, 2023</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Highlights Section -->
+        <div class="highlights">
+            <div class="container highlights-container">
+                <div class="highlight-content">
+                    <h2 class="highlight-title">Highlights of the Month</h2>
+                    <ul class="highlight-list">
+                        <li><i class="fas fa-star"></i> <strong>Student of the Week:</strong> Jessica Park for her community service initiative</li>
+                        <li><i class="fas fa-trophy"></i> <strong>Debate Team:</strong> Qualified for national championships</li>
+                        <li><i class="fas fa-music"></i> <strong>Spring Concert:</strong> Record attendance at the annual music performance</li>
+                        <li><i class="fas fa-graduation-cap"></i> <strong>College Acceptances:</strong> 95% of seniors accepted to their first-choice colleges</li>
+                    </ul>
+                    <a href="#" class="btn nav-link" data-page="events">View All Events</a>
+                </div>
+                <div class="highlight-image">
+                    <img src="E:\Chaff-2\Pandora's Box Cast.jpeg" alt="Students collaborating">
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">426</div>
+                        <div class="stat-label">Articles Published</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1425</div>
+                        <div class="stat-label">Student Contributors</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">750</div>
+                        <div class="stat-label">Events Covered</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Student Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Articles Page -->
+    <section id="articles" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2>Latest Articles</h2>
+            </div>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search articles...">
+                <button class="search-btn">Search</button>
+            </div>
+            
+            <div class="articles-grid">
+                <div class="article-card">
+                    <img src="E:\My Office\CodeFather\Summit College\Images\photo-1559757148-5c350d0d3c56.avif" alt="Robotics Club" class="article-img">
+                    <div class="article-content">
+                        <span class="article-category">Technology</span>
+                        <h3 class="article-title">Robotics Club Builds Award-Winning Robot</h3>
+                        <p class="article-excerpt">Summit's Robotics Club takes first place in the regional competition with their innovative design.</p>
+                        <div class="article-meta">
+                            <span><i class="far fa-user"></i> David Kimani</span>
+                            <span><i class="far fa-calendar"></i> May 8, 2023</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="article-card">
+                    <img src="E:\Chaff-2\Sometimes if you work in groups you are able to share ideas such as make new ones up_.jpeg" alt="Environmental Initiative" class="article-img">
+                    <div class="article-content">
+                        <span class="article-category">Environment</span>
+                        <h3 class="article-title">Students Launch Campus Recycling Initiative</h3>
+                        <p class="article-excerpt">Eco-club members implement new recycling program to reduce campus waste by 40%.</p>
+                        <div class="article-meta">
+                            <span><i class="far fa-user"></i> Monicah Waithera</span>
+                            <span><i class="far fa-calendar"></i> May 5, 2023</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="article-card">
+                    <img src="E:\Chaff-2\Training and Empowerment Program on Web Development_ This Program is Absolutely Free, Rush now and Register_.jpeg" alt="Internship Program" class="article-img">
+                    <div class="article-content">
+                        <span class="article-category">Career</span>
+                        <h3 class="article-title">New Internship Program Partners with Local Tech Firms</h3>
+                        <p class="article-excerpt">Summit Technical College announces partnerships with five leading technology companies.</p>
+                        <div class="article-meta">
+                            <span><i class="far fa-user"></i> Andrew Kivuva</span>
+                            <span><i class="far fa-calendar"></i> May 3, 2025</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="article-card">
+                    <img src="E:\My Office\CodeFather\Summit College\Images\download (2).jpg" alt="Math Competition" class="article-img">
+                    <div class="article-content">
+                        <span class="article-category">Academics</span>
+                        <h3 class="article-title">Math Team Excels in State Competition</h3>
+                        <p class="article-excerpt">Summit's math team places second overall in the statewide mathematics competition.</p>
+                        <div class="article-meta">
+                            <span><i class="far fa-user"></i>Faith Wavinya </span>
+                            <span><i class="far fa-calendar"></i> April 28, 2023</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="article-card">
+                    <img src="E:\My Office\CodeFather\Summit College\Images\Big Chief Skeppy.jpeg" alt="Theater Production" class="article-img">
+                    <div class="article-content">
+                        <span class="article-category">Arts</span>
+                        <h3 class="article-title">Drama Club Presents "A Midsummer Night's Dream"</h3>
+                        <p class="article-excerpt">Student actors deliver a captivating performance of Shakespeare's classic comedy.</p>
+                        <div class="article-meta">
+                            <span><i class="far fa-user"></i> Erick Otsiula</span>
+                            <span><i class="far fa-calendar"></i> April 25, 2023</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="article-card">
+                    <img src="E:\My Office\CodeFather\Summit College\Images\Básico laptop setup.jfif" alt="Career Fair" class="article-img">
+                    <div class="article-content">
+                        <span class="article-category">Career</span>
+                        <h3 class="article-title">Annual Career Fair Attracts 50+ Employers</h3>
+                        <p class="article-excerpt">Students connect with potential employers at Summit's largest career fair to date.</p>
+                        <div class="article-meta">
+                            <span><i class="far fa-user"></i> Robert Kibet</span>
+                            <span><i class="far fa-calendar"></i> April 22, 2024</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <img src="E:\My Office\CodeFather\Summit College\Images\AI.jpeg" alt="Career Fair" class="article-img">
+                    <div class="article-content">
+                        <span class="article-category">Career</span>
+                        <h3 class="article-title">Annual Career Fair Attracts 50+ Employers</h3>
+                        <p class="article-excerpt">Students connect with potential employers at Summit's largest career fair to date.</p>
+                        <div class="article-meta">
+                            <span><i class="far fa-user"></i> Robert Kibet</span>
+                            <span><i class="far fa-calendar"></i> April 22, 2024</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="article-card">
+                    <img src="E:\My Office\CodeFather\Summit College\Images\Coding background.jpeg" alt="Career Fair" class="article-img">
+                    <div class="article-content">
+                        <span class="article-category">Career</span>
+                        <h3 class="article-title">Annual Career Fair Attracts 50+ Employers</h3>
+                        <p class="article-excerpt">Students connect with potential employers at Summit's largest career fair to date.</p>
+                        <div class="article-meta">
+                            <span><i class="far fa-user"></i> Robert Kibet</span>
+                            <span><i class="far fa-calendar"></i> April 22, 2024</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Page -->
+    <section id="gallery" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2>Photo Gallery</h2>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="E:\Chaff-2\Parts of the highlight my year has been🎂_This is….jpeg" alt="Campus Life">
+                    <div class="gallery-overlay">
+                        <h3>Campus Life</h3>
+                        <p>Students enjoying campus activities</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="E:\My Office\CodeFather\Summit College\Images\816f32a9-63c0-4269-9152-e7935f34c6d9.jpeg" alt="Sports Events">
+                    <div class="gallery-overlay">
+                        <h3>Sports Events</h3>
+                        <p>Action from our championship games</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="E:\My Office\CodeFather\Summit College\Images\Basketball.jfif" alt="Art Exhibition">
+                    <div class="gallery-overlay">
+                        <h3>Art Exhibition</h3>
+                        <p>Student artwork on display</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="E:\Chaff-2\Nyataya Ashley Strathmore University.jpeg" alt="Academic Events">
+                    <div class="gallery-overlay">
+                        <h3>Academic Events</h3>
+                        <p>Science fairs and competitions</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="E:\Chaff-2\Pandora's Box Cast.jpeg" alt="Club Activities">
+                    <div class="gallery-overlay">
+                        <h3>Club Activities</h3>
+                        <p>Student organizations in action</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="E:\Chaff-2\See how much Nigerian students spent on studies in 4 months.jpeg" alt="Graduation">
+                    <div class="gallery-overlay">
+                        <h3>Graduation</h3>
+                        <p>Celebrating our graduates</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="E:\My Office\CodeFather\Summit College\Images\Big Chief Skeppy.jpeg" alt="Club Activities">
+                    <div class="gallery-overlay">
+                        <h3>Club Activities</h3>
+                        <p>Student organizations in action</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="E:\My Office\CodeFather\Summit College\Images\download (3).jfif" alt="Academic Events">
+                    <div class="gallery-overlay">
+                        <h3>Academic Events</h3>
+                        <p>Science fairs and competitions</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="E:\My Office\CodeFather\Summit College\Images\IMG-20210312-WA0052.jpg" alt="Club Activities">
+                    <div class="gallery-overlay">
+                        <h3>Club Activities</h3>
+                        <p>Student organizations in action</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="E:\My Office\CodeFather\Summit College\Images\download (3).jpeg" alt="Academic Events">
+                    <div class="gallery-overlay">
+                        <h3>Academic Events</h3>
+                        <p>Science fairs and competitions</p>
+                    </div> 
+                </div>  
+                
+                <div class="gallery-item">
+                    <img src="E:\My Office\CodeFather\Summit College\Images\How To Increase Recycling On Campuses.jpeg" alt="Club Activities">
+                    <div class="gallery-overlay">
+                        <h3>Club Activities</h3>
+                        <p>Student organizations in action</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="E:\My Office\CodeFather\Summit College\Images\HUBiquitous Talent Program_ Empowering the Next Generation of Tech Leaders in Ghana.jpeg" alt="Club Activities">
+                    <div class="gallery-overlay">
+                        <h3>Club Activities</h3>
+                        <p>Student organizations in action</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="E:\My Office\CodeFather\Summit College\Images\IMG-20210302-WA0018.jpg" alt="Club Activities">
+                    <div class="gallery-overlay">
+                        <h3>Club Activities</h3>
+                        <p>Student organizations in action</p>
+                    </div>
+                </div>
+                 
+                <div class="gallery-item">
+                    <img src="E:\My Office\CodeFather\Summit College\Images\Kendrick Lamar vibing.jfif" alt="Club Activities">
+                    <div class="gallery-overlay">
+                        <h3>Club Activities</h3>
+                        <p>Student organizations in action</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="E:\My Office\CodeFather\Summit College\Images\Namibia Business Presentation - the room was full….jpeg" alt="Club Activities">
+                    <div class="gallery-overlay">
+                        <h3>Club Activities</h3>
+                        <p>Student organizations in action</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="E:\My Office\CodeFather\Summit College\Images\Snapchat-12063758~2.jpg" alt="Club Activities">
+                    <div class="gallery-overlay">
+                        <h3>Club Activities</h3>
+                        <p>Student organizations in action</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Student Corner Page -->
+    <section id="student-corner" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2>Student Corner</h2>
+            </div>
+            
+            <div class="student-grid">
+                <div class="student-work">
+                    <h3><i class="fas fa-pen-fancy"></i> Creative Writing</h3>
+                    <div class="work-content">
+                        <p>"The city slept under a blanket of stars, unaware of the secrets that danced between the moonbeams. I watched from my window, a silent observer to the night's mysteries."</p>
+                        <p>Excerpt from "Midnight Whispers" by Jessica Park, Module 1</p>
+                    </div>
+                    <div class="work-author">- Jessica Park</div>
+                </div>
+                
+                <div class="student-work">
+                    <h3><i class="fas fa-paint-brush"></i> Artwork</h3>
+                    <div class="work-content">
+                        <p>"My piece 'Ethereal Dreams' explores the intersection of reality and imagination. Using mixed media, I sought to capture the fleeting nature of dreams as they slip from memory upon waking."</p>
+                        <p>Description of artwork by Alexander Nzioka, Module 4</p>
+                    </div>
+                    <div class="work-author">- Alexander Nzioka</div>
+                </div>
+                
+                <div class="student-work">
+                    <h3><i class="fas fa-microphone-alt"></i> Poetry</h3>
+                    <div class="work-content">
+                        <p>
+                            "The autumn leaves fall,<br>
+                            Whispering secrets of change,<br>
+                            As seasons turn round.<br>
+                            Students walk through campus paths,<br>
+                            Dreams blooming like spring flowers."
+                        </p>
+                        <p>"Seasonal Reflections" by Monicah Waithera, Module 3</p>
+                    </div>
+                    <div class="work-author">- Monicah Waithera</div>
+                </div>
+                
+                <div class="student-work">
+                    <h3><i class="fas fa-poll"></i> Student Poll</h3>
+                    <div class="work-content">
+                        <p><strong>This Month's Question:</strong> What is your favorite school event?</p>
+                        <ul>
+                            <li>Sports Day - 35%</li>
+                            <li>Science Fair - 25%</li>
+                            <li>Art Exhibition - 20%</li>
+                            <li>Music Concert - 15%</li>
+                            <li>Other - 5%</li>
+                        </ul>
+                        <p>Vote for next month's poll in the comments!</p>
+                    </div>
+                </div>
+                
+                <div class="student-work">
+                    <h3><i class="fas fa-comment"></i> Opinion</h3>
+                    <div class="work-content">
+                        <p>"As students at Summit Technical College, we have a unique opportunity to shape our educational experience. I believe we should advocate for more project-based learning that connects classroom concepts to real-world applications."</p>
+                        <p>Excerpt from "Student Voice in Education" by David Kim, Module 2</p>
+                    </div>
+                    <div class="work-author">- David Kim</div>
+                </div>
+                
+                <div class="student-work">
+                    <h3><i class="fas fa-lightbulb"></i> Innovation</h3>
+                    <div class="work-content">
+                        <p>"My team is developing a mobile app that helps students track their homework assignments and study schedules. We're using Flutter for cross-platform compatibility and Firebase for our backend."</p>
+                        <p>Project update from Michael Torres, Computer Science Club</p>
+                    </div>
+                    <div class="work-author">- Michael Torres</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Page -->
+    <section id="events" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2>Events & Announcements</h2>
+            </div>
+            
+            <div class="events-timeline">
+                <div class="event-item">
+                    <span class="event-date">June 15, 2023</span>
+                    <h3 class="event-title">Graduation Ceremony</h3>
+                    <p>Join us as we celebrate the Class of 2023 at our annual graduation ceremony in the Main Auditorium. Ceremony begins at 2:00 PM.</p>
+                </div>
+                
+                <div class="event-item">
+                    <span class="event-date">June 10, 2023</span>
+                    <h3 class="event-title">Final Exams Week</h3>
+                    <p>Final examinations for the Spring semester will be held from June 10-16. Study rooms will be open extended hours.</p>
+                </div>
+                
+                <div class="event-item">
+                    <span class="event-date">June 5, 2023</span>
+                    <h3 class="event-title">Summer Internship Fair</h3>
+                    <p>Connect with employers offering summer internship opportunities. Bring your resume and dress professionally. 10 AM - 2 PM in the Student Center.</p>
+                </div>
+                
+                <div class="event-item">
+                    <span class="event-date">May 30, 2023</span>
+                    <h3 class="event-title">Spring Music Concert</h3>
+                    <p>Our talented student musicians present their annual spring concert featuring classical and contemporary pieces. 7 PM in the Music Hall.</p>
+                </div>
+                
+                <div class="event-item">
+                    <span class="event-date">May 25, 2023</span>
+                    <h3 class="event-title">STEM Career Day</h3>
+                    <p>Professionals from science, technology, engineering, and math fields will share their career experiences and advice. Multiple sessions throughout the day.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Editorial Team Page -->
+    <section id="team" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2>Editorial Team</h2>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="E:\My Office\CodeFather\Summit College\Images\Post from Nero Knowledge.jpeg" alt="Editor-in-Chief" class="member-photo">
+                    <h3 class="member-name">Mr. Dickson</h3>
+                    <p class="member-role">Editor-in-Chief</p>
+                    <p class="member-bio">Senior with a passion for journalism and creative writing. Plans to study communications in college.</p>
+                    <div class="member-contact">
+                        <a href="#"><i class="far fa-envelope"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="E:\Chaff-2\Mirror Picture.jfif" alt="Sports Editor" class="member-photo">
+                    <h3 class="member-name">Ashley Anyango</h3>
+                    <p class="member-role">Sports Editor</p>
+                    <p class="member-bio">Varsity athlete and sports enthusiast with a talent for reporting. Also serves as captain of the basketball team.</p>
+                    <div class="member-contact">
+                        <a href="#"><i class="far fa-envelope"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="E:\Chaff-2\Mirror selfie 🇳🇬.jpeg" alt="Arts Editor" class="member-photo">
+                    <h3 class="member-name">Alexander Kathanzu</h3>
+                    <p class="member-role">Arts Editor</p>
+                    <p class="member-bio">Visual arts student with an eye for design and creative content. Specializes in digital art and photography.</p>
+                    <div class="member-contact">
+                        <a href="#"><i class="far fa-envelope"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <img src="E:\Chaff-2\James Saint Patrick Illustration.jfif" alt="Faculty Advisor" class="member-photo">
+                    <h3 class="member-name">Mr. Davis</h3>
+                    <p class="member-role">Faculty Advisor</p>
+                    <p class="member-bio">English teacher with 10+ years of experience in student journalism. Previously worked as a newspaper reporter.</p>
+                    <div class="member-contact">
+                        <a href="#"><i class="far fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Archives Page -->
+    <section id="archives" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2>Magazine Archives</h2>
+            </div>
+            
+            <div class="archives-container">
+                <div class="archive-year">
+                    <i class="fas fa-book"></i>
+                    <h3>2023</h3>
+                    <p>Spring Edition</p>
+                </div>
+                
+                <div class="archive-year">
+                    <i class="fas fa-book"></i>
+                    <h3>2022</h3>
+                    <p>Fall & Spring Editions</p>
+                </div>
+                
+                <div class="archive-year">
+                    <i class="fas fa-book"></i>
+                    <h3>2021</h3>
+                    <p>Fall & Spring Editions</p>
+                </div>
+                
+                <div class="archive-year">
+                    <i class="fas fa-book"></i>
+                    <h3>2020</h3>
+                    <p>Fall & Spring Editions</p>
+                </div>
+                
+                <div class="archive-year">
+                    <i class="fas fa-book"></i>
+                    <h3>2019</h3>
+                    <p>Fall & Spring Editions</p>
+                </div>
+                
+                <div class="archive-year">
+                    <i class="fas fa-book"></i>
+                    <h3>2018</h3>
+                    <p>Fall & Spring Editions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Page -->
+    <section id="contact" class="page">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact & Submissions</h2>
+            </div>
+            
+            <!-- Submission Guidelines -->
+            <div class="guidelines">
+                <h3><i class="fas fa-info-circle"></i> Submission Guidelines</h3>
+                <p>Before submitting your work, please review our guidelines:</p>
+                <ul>
+                    <li>All submissions must be original work created by Summit Technical College students</li>
+                    <li>Written submissions should be between 300-1500 words</li>
+                    <li>Images should be high resolution (minimum 1200px width)</li>
+                    <li>Include your full name, Module, and contact information</li>
+                    <li>Allow 2-3 weeks for our editorial team to review your submission</li>
+                </ul>
+                <p>If you have any questions, please contact our editorial team at <strong>magazine@summittech.edu</strong></p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-form">
+                    <h3>Submit Your Work</h3>
+                    <form id="submissionForm">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Your Name *</label>
+                            <input type="text" id="name" class="form-control" required>
+                            <div class="form-error" id="nameError">Please enter your full name</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address *</label>
+                            <input type="email" id="email" class="form-control" required>
+                            <div class="form-error" id="emailError">Please enter a valid email address</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="Module" class="form-label">Module Level *</label>
+                            <select id="Module" class="form-control" required>
+                                <option value="">Select your Module</option>
+                                <option value="1">1st Module</option>
+                                <option value="2">2nd Module</option>
+                                <option value="3">3rd Module</option>
+                                <option value="4">4th Module</option>
+                                <option value="college">College Level</option>
+                            </select>
+                            <div class="form-error" id="ModuleError">Please select your Module level</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="category" class="form-label">Submission Category *</label>
+                            <select id="category" class="form-control" required>
+                                <option value="">Select a category</option>
+                                <option value="article">Article</option>
+                                <option value="poem">Poem</option>
+                                <option value="story">Short Story</option>
+                                <option value="art">Artwork</option>
+                                <option value="opinion">Opinion Piece</option>
+                                <option value="photo">Photography</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <div class="form-error" id="categoryError">Please select a category</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="title" class="form-label">Submission Title *</label>
+                            <input type="text" id="title" class="form-control" required>
+                            <div class="form-error" id="titleError">Please enter a title for your submission</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message" class="form-label">Your Submission *</label>
+                            <textarea id="message" class="form-control" required placeholder="Paste your written work here or describe your visual submission..."></textarea>
+                            <div class="form-error" id="messageError">Please provide your submission content</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="file" class="form-label">Upload Files (Optional)</label>
+                            <input type="file" id="file" class="form-control">
+                            <small>Accepted formats: JPG, PNG, PDF, DOC, DOCX (Max 10MB)</small>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Submit Your Work</button>
+                    </form>
+                </div>
+                
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>magazine@summittech.edu</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+254 745 560 764 / +254 718 636 678 / +254 785 929 142</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Address</h4>
+                            <p>Summit Technical College<br>Bank House 6th Floor, Moi Avenue next to sport house<br>Nairobi City, Ke</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Office Hours</h4>
+                            <p>Monday - Friday: 8:00 AM - 4:00 PM</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Submission Status -->
+                    <div class="submission-status">
+                        <div class="status-header">
+                            <h3>Your Submission Status</h3>
+                            <button class="btn btn-success" id="checkStatusBtn">Check Status</button>
+                        </div>
+                        
+                        <div id="statusList">
+                            <!-- Status items will be dynamically added here -->
+                            <div class="status-item">
+                                <div class="status-icon pending">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="status-details">
+                                    <div class="status-title">Spring Poetry Collection</div>
+                                    <div class="status-meta">
+                                        <span class="status-date">Submitted: May 10, 2023</span>
+                                        <span class="status-category">Poetry</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="status-item">
+                                <div class="status-icon reviewed">
+                                    <i class="fas fa-eye"></i>
+                                </div>
+                                <div class="status-details">
+                                    <div class="status-title">Campus Sustainability Article</div>
+                                    <div class="status-meta">
+                                        <span class="status-date">Submitted: April 28, 2023</span>
+                                        <span class="status-category">Article</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="section-title">
+                <h2>Stay Updated</h2>
+            </div>
+            <p>Subscribe to our newsletter to receive the latest articles and updates directly in your inbox.</p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Your email address" required>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Summit Voice</h3>
+                    <p>The official student magazine of Summit Technical College, dedicated to showcasing student talent and keeping our community informed.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#" class="nav-link" data-page="home">Home</a></li>
+                        <li><a href="#" class="nav-link" data-page="articles">Articles</a></li>
+                        <li><a href="#" class="nav-link" data-page="gallery">Gallery</a></li>
+                        <li><a href="#" class="nav-link" data-page="student-corner">Student Corner</a></li>
+                        <li><a href="#" class="nav-link" data-page="events">Events</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">News</a></li>
+                        <li><a href="#">Sports</a></li>
+                        <li><a href="#">Arts</a></li>
+                        <li><a href="#">Science</a></li>
+                        <li><a href="#">Technology</a></li>
+                        <li><a href="#">Opinion</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> magazine@summittech.edu</li>
+                        <li><i class="fas fa-phone"></i> +254 745 560 764 /</li>
+                        <li><i class="fas fa-phone"></i> +254 718 636 678 /</li>
+                        <li><i class="fas fa-phone"></i>+254 785 929 142.</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Bank House 6th Floor, Moi Avenue next to sport house</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Summit Voice - Summit Technical College. All rights reserved.</p>
+                <p>Designed by Alexander N. Kathanzu</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Submission Success Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal">
+            <div class="modal-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Submission Received!</h3>
+            <p>Thank you for submitting your work to Summit Voice. Our editorial team will review your submission and contact you within 2-3 weeks.</p>
+            <p>You can check the status of your submission at any time using the "Check Status" button on the Contact page.</p>
+            <button class="btn btn-primary" id="closeModalBtn">Continue</button>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mainNav').classList.toggle('active');
+        });
+        
+        // Page navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Get the target page
+                const targetPage = this.getAttribute('data-page');
+                
+                // Hide all pages
+                document.querySelectorAll('.page').forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                // Show target page
+                document.getElementById(targetPage).classList.add('active');
+                
+                // Update active nav link
+                document.querySelectorAll('.nav-link').forEach(navLink => {
+                    navLink.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                // Close mobile menu if open
+                document.getElementById('mainNav').classList.remove('active');
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            });
+        });
+        
+        // Form validation and submission
+        document.getElementById('submissionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Reset errors
+            document.querySelectorAll('.form-error').forEach(error => {
+                error.style.display = 'none';
+            });
+            document.querySelectorAll('.form-control').forEach(input => {
+                input.classList.remove('error');
+            });
+            
+            // Get form values
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const Module = document.getElementById('Module').value;
+            const category = document.getElementById('category').value;
+            const title = document.getElementById('title').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            let isValid = true;
+            
+            // Validate name
+            if (!name) {
+                document.getElementById('nameError').style.display = 'block';
+                document.getElementById('name').classList.add('error');
+                isValid = false;
+            }
+            
+            // Validate email
+            if (!email || !isValidEmail(email)) {
+                document.getElementById('emailError').style.display = 'block';
+                document.getElementById('email').classList.add('error');
+                isValid = false;
+            }
+            
+            // Validate Module
+            if (!Module) {
+                document.getElementById('ModuleError').style.display = 'block';
+                document.getElementById('Module').classList.add('error');
+                isValid = false;
+            }
+            
+            // Validate category
+            if (!category) {
+                document.getElementById('categoryError').style.display = 'block';
+                document.getElementById('category').classList.add('error');
+                isValid = false;
+            }
+            
+            // Validate title
+            if (!title) {
+                document.getElementById('titleError').style.display = 'block';
+                document.getElementById('title').classList.add('error');
+                isValid = false;
+            }
+            
+            // Validate message
+            if (!message) {
+                document.getElementById('messageError').style.display = 'block';
+                document.getElementById('message').classList.add('error');
+                isValid = false;
+            }
+            
+            // If form is valid, show success modal
+            if (isValid) {
+                // In a real application, you would send the data to a server here
+                // For this demo, we'll just show the success modal
+                document.getElementById('successModal').classList.add('active');
+                
+                // Add the new submission to the status list
+                addSubmissionToStatus(title, category);
+                
+                // Reset form
+                this.reset();
+            }
+        });
+        
+        // Helper function to validate email
+        function isValidEmail(email) {
+            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
+        
+        // Add submission to status list
+        function addSubmissionToStatus(title, category) {
+            const statusList = document.getElementById('statusList');
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+            
+            const statusItem = document.createElement('div');
+            statusItem.className = 'status-item';
+            statusItem.innerHTML = `
+                <div class="status-icon pending">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="status-details">
+                    <div class="status-title">${title}</div>
+                    <div class="status-meta">
+                        <span class="status-date">Submitted: ${dateStr}</span>
+                        <span class="status-category">${getCategoryName(category)}</span>
+                    </div>
+                </div>
+            `;
+            
+            statusList.insertBefore(statusItem, statusList.firstChild);
+        }
+        
+        // Helper function to get category name
+        function getCategoryName(categoryValue) {
+            const categories = {
+                'article': 'Article',
+                'poem': 'Poetry',
+                'story': 'Short Story',
+                'art': 'Artwork',
+                'opinion': 'Opinion Piece',
+                'photo': 'Photography',
+                'other': 'Other'
+            };
+            
+            return categories[categoryValue] || 'Submission';
+        }
+        
+        // Close modal
+        document.getElementById('closeModalBtn').addEventListener('click', function() {
+            document.getElementById('successModal').classList.remove('active');
+        });
+        
+        // Check status button
+        document.getElementById('checkStatusBtn').addEventListener('click', function() {
+            alert('Your submission status has been refreshed. Our team is currently reviewing your work.');
+        });
+        
+        // Newsletter form submission
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for subscribing to our newsletter!');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
